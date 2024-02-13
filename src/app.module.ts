@@ -3,6 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module'; // 예시: UserModule이 import되어야 함
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './auth/auth.guard'; // 실제 파일 위치에 따라 경로를 수정하세요.
 
 @Module({
   imports: [
@@ -19,6 +21,11 @@ import { AppService } from './app.service';
     UserModule, // 예시: 다른 모듈을 import하는 경우
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+  ],
 })
 export class AppModule {}
