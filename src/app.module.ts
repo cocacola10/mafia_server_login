@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from './user/user.module'; // 예시: UserModule이 import되어야 함
+import { JwtModule, JwtService } from '@nestjs/jwt'; // JwtService import 추가
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserModule } from './user/user.module'; 
 import { APP_GUARD } from '@nestjs/core';
-import { AuthGuard } from './auth/auth.guard'; // 실제 파일 위치에 따라 경로를 수정하세요.
+import { AuthGuard } from './auth/auth.guard'; 
 
 @Module({
   imports: [
@@ -18,10 +19,15 @@ import { AuthGuard } from './auth/auth.guard'; // 실제 파일 위치에 따라
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    UserModule, // 예시: 다른 모듈을 import하는 경우
+    UserModule,
+    JwtModule.register({
+      // JwtModule 설정
+    }),
   ],
   controllers: [AppController],
-  providers: [AppService,
+  providers: [
+    AppService,
+    JwtService, // JwtService를 providers에 추가
     {
       provide: APP_GUARD,
       useClass: AuthGuard,
