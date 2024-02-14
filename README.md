@@ -58,6 +58,10 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+이거는 데이터베이스랑 연결을 못하고 터진 코드입니다. 참고는 되도록 하지 마시고 필요한 분들은 nestjs 공식문서 참고 바랍니다.
+https://docs.nestjs.com/security/authentication
+이 주소가 인증 관련 공식문서입니다.
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
